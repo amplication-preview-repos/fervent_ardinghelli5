@@ -9,6 +9,10 @@ import { ColoList } from "./colo/ColoList";
 import { ColoCreate } from "./colo/ColoCreate";
 import { ColoEdit } from "./colo/ColoEdit";
 import { ColoShow } from "./colo/ColoShow";
+import { PostList } from "./post/PostList";
+import { PostCreate } from "./post/PostCreate";
+import { PostEdit } from "./post/PostEdit";
+import { PostShow } from "./post/PostShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -41,6 +45,13 @@ const App = (): React.ReactElement => {
           edit={ColoEdit}
           create={ColoCreate}
           show={ColoShow}
+        />
+        <Resource
+          name="Post"
+          list={PostList}
+          edit={PostEdit}
+          create={PostCreate}
+          show={PostShow}
         />
       </Admin>
     </div>

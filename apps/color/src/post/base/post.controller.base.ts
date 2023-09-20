@@ -16,24 +16,24 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
-import { ColoService } from "../colo.service";
-import { ColoCreateInput } from "./ColoCreateInput";
-import { ColoWhereInput } from "./ColoWhereInput";
-import { ColoWhereUniqueInput } from "./ColoWhereUniqueInput";
-import { ColoFindManyArgs } from "./ColoFindManyArgs";
-import { ColoUpdateInput } from "./ColoUpdateInput";
-import { Colo } from "./Colo";
-import { Post } from "../../post/base/Post";
+import { PostService } from "../post.service";
+import { PostCreateInput } from "./PostCreateInput";
+import { PostWhereInput } from "./PostWhereInput";
+import { PostWhereUniqueInput } from "./PostWhereUniqueInput";
+import { PostFindManyArgs } from "./PostFindManyArgs";
+import { PostUpdateInput } from "./PostUpdateInput";
+import { Post } from "./Post";
 
-export class ColoControllerBase {
-  constructor(protected readonly service: ColoService) {}
+export class PostControllerBase {
+  constructor(protected readonly service: PostService) {}
   @common.Post()
-  @swagger.ApiCreatedResponse({ type: Colo })
-  async create(@common.Body() data: ColoCreateInput): Promise<Colo> {
+  @swagger.ApiCreatedResponse({ type: Post })
+  async create(@common.Body() data: PostCreateInput): Promise<Post> {
     return await this.service.create({
       data: data,
       select: {
         createdAt: true,
+        descritpin: true,
         id: true,
         title: true,
         updatedAt: true,
@@ -42,14 +42,15 @@ export class ColoControllerBase {
   }
 
   @common.Get()
-  @swagger.ApiOkResponse({ type: [Colo] })
-  @ApiNestedQuery(ColoFindManyArgs)
-  async findMany(@common.Req() request: Request): Promise<Colo[]> {
-    const args = plainToClass(ColoFindManyArgs, request.query);
+  @swagger.ApiOkResponse({ type: [Post] })
+  @ApiNestedQuery(PostFindManyArgs)
+  async findMany(@common.Req() request: Request): Promise<Post[]> {
+    const args = plainToClass(PostFindManyArgs, request.query);
     return this.service.findMany({
       ...args,
       select: {
         createdAt: true,
+        descritpin: true,
         id: true,
         title: true,
         updatedAt: true,
@@ -58,15 +59,16 @@ export class ColoControllerBase {
   }
 
   @common.Get("/:id")
-  @swagger.ApiOkResponse({ type: Colo })
+  @swagger.ApiOkResponse({ type: Post })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   async findOne(
-    @common.Param() params: ColoWhereUniqueInput
-  ): Promise<Colo | null> {
+    @common.Param() params: PostWhereUniqueInput
+  ): Promise<Post | null> {
     const result = await this.service.findOne({
       where: params,
       select: {
         createdAt: true,
+        descritpin: true,
         id: true,
         title: true,
         updatedAt: true,
@@ -81,18 +83,19 @@ export class ColoControllerBase {
   }
 
   @common.Patch("/:id")
-  @swagger.ApiOkResponse({ type: Colo })
+  @swagger.ApiOkResponse({ type: Post })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   async update(
-    @common.Param() params: ColoWhereUniqueInput,
-    @common.Body() data: ColoUpdateInput
-  ): Promise<Colo | null> {
+    @common.Param() params: PostWhereUniqueInput,
+    @common.Body() data: PostUpdateInput
+  ): Promise<Post | null> {
     try {
       return await this.service.update({
         where: params,
         data: data,
         select: {
           createdAt: true,
+          descritpin: true,
           id: true,
           title: true,
           updatedAt: true,
@@ -109,16 +112,17 @@ export class ColoControllerBase {
   }
 
   @common.Delete("/:id")
-  @swagger.ApiOkResponse({ type: Colo })
+  @swagger.ApiOkResponse({ type: Post })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   async delete(
-    @common.Param() params: ColoWhereUniqueInput
-  ): Promise<Colo | null> {
+    @common.Param() params: PostWhereUniqueInput
+  ): Promise<Post | null> {
     try {
       return await this.service.delete({
         where: params,
         select: {
           createdAt: true,
+          descritpin: true,
           id: true,
           title: true,
           updatedAt: true,

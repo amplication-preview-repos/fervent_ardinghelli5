@@ -13,3 +13,11 @@ model Colo {
   title     String?
   updatedAt DateTime @updatedAt
 }
+
+model Post {
+  createdAt  DateTime @default(now())
+  descritpin String?
+  id         String   @id @default(cuid())
+  title      String?
+  updatedAt  DateTime @updatedAt
+}
