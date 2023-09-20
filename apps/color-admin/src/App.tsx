@@ -5,6 +5,10 @@ import { theme } from "./theme/theme";
 import Login from "./Login";
 import "./App.scss";
 import Dashboard from "./pages/Dashboard";
+import { ColoList } from "./colo/ColoList";
+import { ColoCreate } from "./colo/ColoCreate";
+import { ColoEdit } from "./colo/ColoEdit";
+import { ColoShow } from "./colo/ColoShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -30,7 +34,15 @@ const App = (): React.ReactElement => {
         theme={theme}
         dashboard={Dashboard}
         loginPage={Login}
-      ></Admin>
+      >
+        <Resource
+          name="Colo"
+          list={ColoList}
+          edit={ColoEdit}
+          create={ColoCreate}
+          show={ColoShow}
+        />
+      </Admin>
     </div>
   );
 };
